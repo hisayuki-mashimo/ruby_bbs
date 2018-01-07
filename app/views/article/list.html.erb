@@ -6,6 +6,12 @@
         <td><%= article.user.name %></td>
         <td><%= article.title %></td>
         <td><%= article.body %></td>
+        <td>
+            <%= form_for article, :url => article_create_input_url, html: {method: 'PUT'} do |f| %>
+                <%= f.hidden_field :parent_id, value: article.id %>
+                <%= f.submit '返信' %>
+            <% end %>
+        </td>
     </tr>
     <% end %>
 </table>

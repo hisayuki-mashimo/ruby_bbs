@@ -1,0 +1,36 @@
+<h1>Article#create_confirm</h1>
+
+<%= form_for @article, :url => article_create_do_url, html: {method: 'PUT'} do |f| %>
+    <%= f.hidden_field :parent_id, value: @article.parent_id %>
+    <%= f.hidden_field :title,     value: @article.title %>
+    <%= f.hidden_field :body,      value: @article.body %>
+    <table>
+        <tr>
+            <th>件名</th>
+            <td>
+                <%= @article.title %>
+            </td>
+        </tr>
+        <tr>
+            <th>本文</th>
+            <td>
+                <%= @article.body %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%= f.submit '返信' %>
+            </td>
+        </tr>
+    </table>
+<% end %>
+
+<% if @parent_article then %>
+<table>
+    <tr>
+        <td><%= @parent_article.user.name %></td>
+        <td><%= @parent_article.title %></td>
+        <td><%= @parent_article.body %></td>
+    </tr>
+</table>
+<% end %>
