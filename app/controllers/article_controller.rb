@@ -1,11 +1,12 @@
 class ArticleController < ApplicationController
   def list
-    limit  = 3
-    page   = params[:page] ? params[:page].to_i : 1
-    offset = (page - 1) * limit
+    @page = params[:page] ? params[:page].to_i : 1
 
-    @articles = Article.offset(offset).limit(limit)
-    @article  = Article.new();
+    limit  = 3
+    offset = (@page - 1) * limit
+
+    @articles = Article.offset(offset).limit(limit).where(parent_id: params[:parent_id])
+    @article  = Article.new()
   end
 
   def create_input
@@ -18,6 +19,7 @@ class ArticleController < ApplicationController
 
   def create_confirm
     @article = Article.new()
+
     @article.title = params[:article][:title]
     @article.body  = params[:article][:body]
 

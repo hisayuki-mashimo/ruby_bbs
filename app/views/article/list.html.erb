@@ -5,7 +5,15 @@
     <tr>
         <td><%= article.user.name %></td>
         <td><%= article.title %></td>
-        <td><%= article.body %></td>
+        <td>
+            <%= article.body %><br />
+
+            <% if article.children_articles %>
+            <% article.children_articles.each do |child_article| %>
+            ＞返信 <%= child_article.body %><br />
+            <% end %>
+            <% end %>
+        </td>
         <td>
             <%= form_for article, :url => article_create_input_url, html: {method: 'PUT'} do |f| %>
                 <%= f.hidden_field :parent_id, value: article.id %>
@@ -15,3 +23,12 @@
     </tr>
     <% end %>
 </table>
+
+<div>
+<% if @page > 1 then %>
+<%= link_to '＜前へ', :url => article_list_url, page: @page - 1 %>
+<% else %>
+＜前へ
+<% end %>
+<%= link_to '次へ＞', :url => article_list_url, page: @page + 1 %>
+</div>
