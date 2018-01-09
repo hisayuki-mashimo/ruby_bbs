@@ -15,7 +15,7 @@
             <% end %>
         </td>
         <td>
-            <%= form_for article, :url => article_create_input_url, html: {method: 'PUT'} do |f| %>
+            <%= form_for article, :url => {:action => 'new'}, html: {method: 'GET'} do |f| %>
                 <%= f.hidden_field :parent_id, value: article.id %>
                 <%= f.submit '返信' %>
             <% end %>
@@ -26,9 +26,9 @@
 
 <div>
 <% if @page > 1 then %>
-<%= link_to '＜前へ', :url => article_list_url, page: @page - 1 %>
+<%= link_to '＜前へ', page: @page - 1 %>
 <% else %>
 ＜前へ
 <% end %>
-<%= link_to '次へ＞', :url => article_list_url, page: @page + 1 %>
+<%= link_to '次へ＞', page: @page + 1 %>
 </div>

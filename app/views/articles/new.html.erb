@@ -1,6 +1,6 @@
 <h1>Article#create_input</h1>
 
-<%= form_for @article, :url => article_create_confirm_url, html: {method: 'PUT'} do |f| %>
+<%= form_for @article, :url => {:action => 'create'}, html: {method: 'POST'} do |f| %>
     <%= f.hidden_field :parent_id, value: @parent_article.id %>
     <table>
         <tr>

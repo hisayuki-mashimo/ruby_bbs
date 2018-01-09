@@ -1,5 +1,5 @@
-class ArticleController < ApplicationController
-  def list
+class ArticlesController < ApplicationController
+  def index
     @page = params[:page] ? params[:page].to_i : 1
 
     limit  = 3
@@ -9,7 +9,7 @@ class ArticleController < ApplicationController
     @article  = Article.new()
   end
 
-  def create_input
+  def new
     @article = Article.new()
 
     if params[:article] && params[:article][:parent_id] then
@@ -17,19 +17,7 @@ class ArticleController < ApplicationController
     end
   end
 
-  def create_confirm
-    @article = Article.new()
-
-    @article.title = params[:article][:title]
-    @article.body  = params[:article][:body]
-
-    if params[:article] && params[:article][:parent_id] then
-      @parent_article = Article.find(params[:article][:parent_id])
-      @article.parent_id = params[:article][:parent_id]
-    end
-  end
-
-  def create_do
+  def create
     dto = {
       :title   => params[:article][:title],
       :body    => params[:article][:body],
@@ -42,6 +30,6 @@ class ArticleController < ApplicationController
 
     Article.create! dto
 
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 end
