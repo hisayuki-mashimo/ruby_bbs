@@ -1,3 +1,3 @@
 class Chat < ApplicationRecord
-    has_many :talks as: group_id
+    has_many :talks, as: group
 end
