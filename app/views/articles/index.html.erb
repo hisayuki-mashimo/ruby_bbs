@@ -1,6 +1,19 @@
 <h1>Article#list</h1>
 
 <table>
+    <tr>
+        <th>議題</th>
+        <td><%= @topic.title %></td>
+    </tr>
+    <tr>
+        <th>内容</th>
+        <td><%= @topic.body %></td>
+    </tr>
+</table>
+
+<h2>返信一覧</h2>
+
+<table>
     <% @articles.each do |article| %>
     <tr>
         <td><%= article.user.name %></td>

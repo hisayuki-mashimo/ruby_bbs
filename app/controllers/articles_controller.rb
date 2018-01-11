@@ -1,11 +1,15 @@
 class ArticlesController < ApplicationController
   def index
-    @page = params[:page] ? params[:page].to_i : 1
+    @group_id = params[:group_id] ? params[:group_id].to_i : 1
+    @page     = params[:page] ? params[:page].to_i : 1
 
     limit  = 3
     offset = (@page - 1) * limit
 
-    @articles = Article.offset(offset).limit(limit).where(parent_id: params[:parent_id])
+    # 刹那(Q&Aか雑談か)
+    @topic = Question.find(@group_id);
+
+    @articles = Article.offset(offset).limit(limit).where(group_id: params[:group_id]).where(parent_id: params[:parent_id])
     @article  = Article.new()
   end
 
